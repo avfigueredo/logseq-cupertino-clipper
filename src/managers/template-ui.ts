@@ -248,13 +248,13 @@ export function showTemplateEditor(template: Template | null): void {
 		lastUsedOption.value = '';
 		lastUsedOption.textContent = getMessage('lastUsed');
 		vaultSelect.appendChild(lastUsedOption);
-		generalSettings.vaults.forEach(vault => {
+		generalSettings.graphs.forEach((graph: string) => {
 			const option = document.createElement('option');
-			option.value = vault;
-			option.textContent = vault;
+			option.value = graph;
+			option.textContent = graph;
 			vaultSelect.appendChild(option);
 		});
-		vaultSelect.value = editingTemplate.vault || '';
+		vaultSelect.value = editingTemplate.graph || '';
 	}
 
 	updateUrl('templates', editingTemplate.id);
@@ -542,7 +542,7 @@ export function updateTemplateFromForm(): void {
 	if (triggersTextarea) template.triggers = triggersTextarea.value.split('\n').filter(Boolean);
 
 	const vaultSelect = document.getElementById('template-vault') as HTMLSelectElement;
-	if (vaultSelect) template.vault = vaultSelect.value || undefined;
+	if (vaultSelect) template.graph = vaultSelect.value || undefined;
 
 	hasUnsavedChanges = true;
 }

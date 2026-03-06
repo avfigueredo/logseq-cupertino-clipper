@@ -130,18 +130,6 @@ export async function saveToObsidian(
 	const vaultParam = vault ? `&vault=${encodeURIComponent(vault)}` : '';
 	obsidianUrl += vaultParam;
 
-	// Add silent parameter if silentOpen is enabled
-	if (generalSettings.silentOpen) {
-		obsidianUrl += '&silent=true';
-	}
-
-	if (generalSettings.legacyMode) {
-		// Use the URI method
-		obsidianUrl += `&content=${encodeURIComponent(fileContent)}`;
-		console.log('Obsidian URL:', obsidianUrl);
-		openObsidianUrl(obsidianUrl);
-	} else {
-		// Try to copy to clipboard with fallback mechanisms
-		await tryClipboardWrite(fileContent, obsidianUrl);
-	}
+	// silentOpen and legacyMode have been removed; use clipboard fallback only
+	await tryClipboardWrite(fileContent, obsidianUrl);
 }

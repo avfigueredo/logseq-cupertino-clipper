@@ -205,10 +205,10 @@ async function initializeExtension(tabId: number) {
 function setupMessageListeners() {
 	browser.runtime.onMessage.addListener((request: any, sender: browser.Runtime.MessageSender, sendResponse: (response?: any) => void) => {
 		if (request.action === "triggerQuickClip") {
-			handleClipObsidian().then(() => {
+			handleClipLogseq().then(() => {
 				sendResponse({success: true});
-			}).catch((error) => {
-				console.error('Error in handleClipObsidian:', error);
+			}).catch((error: any) => {
+				console.error('Error in handleClipLogseq:', error);
 				sendResponse({success: false, error: error.message});
 			});
 			return true;
